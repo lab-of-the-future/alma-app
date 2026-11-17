@@ -1,0 +1,13 @@
+Drop your demo videos in this folder with these exact names (MP4, H.264):
+
+  hero.mp4                 -> big video at the top of the page
+  lab-reports.mp4          -> "Automated lab reports"
+  mistake-detection.mp4    -> "Protocol mistake detection"
+  object-tracking.mp4      -> "Lab object & display detection"
+  pipetting-tracking.mp4   -> "Pipetting tracking on 96-well plates"
+
+Each video replaces its illustration automatically. A slot with no video
+keeps showing the illustration, so you can add them one at a time.
+
+Tip: keep each file small (well under 20 MB). PythonAnywhere's free plan
+has 512 MB of disk in total, and smaller files load faster for visitors.
