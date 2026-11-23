@@ -125,7 +125,7 @@ html.intro-active body { overflow: hidden; }
 .text-link:hover::after { transform: translateX(3px); }
 
 /* ---------- Logo pieces ---------- */
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--cream); }
+.brand { display: flex; align-items: center; gap: 12px; min-height: 44px; text-decoration: none; color: var(--cream); }
 .brand-mark { width: 58px; height: auto; aspect-ratio: 500 / 151; flex: none; }
 .brand-word { width: 70px; height: auto; aspect-ratio: 500 / 94; flex: none; }
 
@@ -321,7 +321,7 @@ html.intro-active body { overflow: hidden; }
 
 /* ---------- Phones ---------- */
 @media (max-width: 640px) {
-  .container { padding: 0 20px; }
+  .container { padding-left: 20px; padding-right: 20px; }
   .section { padding: 80px 0 64px; }
   .section-tight { padding-top: 0; }
   .hero { padding-top: 32px; padding-bottom: 56px; }
@@ -337,6 +337,18 @@ html.intro-active body { overflow: hidden; }
   .team-card { padding: 24px; }
   .avatar { width: 64px; height: 64px; font-size: 22px; }
   .nav-links a:not(.btn) { display: none; }   /* phones: logo + "Watch demos" only */
+
+  /* How it works: number beside the heading, so the cards are shorter */
+  .step { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; row-gap: 8px; align-items: center; padding: 24px; }
+  .step p { grid-column: 2; }
+  .step h3 { font-size: 24px; }
+
+  .pipeline li { padding: 20px; }
+
+  /* Footer: logo on top, text below */
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .footer-brand { flex-wrap: wrap; }
+  .footer-brand > span { flex-basis: 100%; }
   .intro-skip { right: 16px; bottom: 16px; }
   .cta-mark { width: 300px; right: -80px; }
 }

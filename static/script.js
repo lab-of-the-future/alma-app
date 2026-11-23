@@ -49,7 +49,7 @@ document.querySelectorAll('video[data-speed]').forEach(applySpeed);
   // Hold the last frame (the logo) for a moment before fading.
   video.addEventListener('ended', function () { setTimeout(finish, 500); });
   video.addEventListener('error', finish);
-  skipBtn.addEventListener('click', finish);
+  if (skipBtn) skipBtn.addEventListener('click', finish);
   document.addEventListener('keydown', onKey);
 
   // If the video hasn't started within 4 s (slow connection, autoplay blocked), skip it.

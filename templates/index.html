@@ -30,7 +30,7 @@
   <div class="intro" id="intro">
     <!-- data-speed: playback speed (1 = normal, 1.5 = 50% faster) -->
     <video class="intro-video" data-speed="3.0" data-src="{{ url_for('static', filename='videos/logo.mp4') }}" muted playsinline preload="none" aria-hidden="true"></video>
-    {% comment %} <button type="button" class="intro-skip">Skip intro</button> {% endcomment %}
+    {# <button type="button" class="intro-skip">Skip intro</button> #}
   </div>
 
   <a class="skip-link" href="#main">Skip to content</a>
@@ -47,7 +47,7 @@
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
         <a href="#team">Team</a>
-        <a href="#learn">Learn more</a>
+        {# <a href="#learn">Learn more</a> #}
         <a href="#demos" class="btn btn-light btn-sm">Watch demos</a>
       </div>
     </nav>
@@ -66,7 +66,7 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
           See it in action
         </a>
-        <a href="#learn" class="btn btn-outline">Read the write-up</a>
+        {# <a href="#learn" class="btn btn-outline">Read the write-up</a> #}
       </div>
     </div>
 
@@ -122,7 +122,7 @@
             </ul>
           </div>
         </article>
-        <hr style="width:100%; border:0; border-top:1px solid #E2DDCC; margin:0;">
+        <hr style="width:100%; border:0; border-top:1px solid rgba(143,208,200,0.2); margin:0;">
         <!-- Demo 2: lab-specific object detection & tracking -->
         <article class="demo reverse">
           <div class="demo-text">
