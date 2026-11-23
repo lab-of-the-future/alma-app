@@ -29,7 +29,7 @@
   <!-- ================= LOGO INTRO (full screen) ================= -->
   <div class="intro" id="intro">
     <!-- data-speed: playback speed (1 = normal, 1.5 = 50% faster) -->
-    <video class="intro-video" data-speed="1.5" data-src="{{ url_for('static', filename='videos/logo.mp4') }}" muted playsinline preload="none" aria-hidden="true"></video>
+    <video class="intro-video" data-speed="3.0" data-src="{{ url_for('static', filename='videos/logo.mp4') }}" muted playsinline preload="none" aria-hidden="true"></video>
     <button type="button" class="intro-skip">Skip intro</button>
   </div>
 
@@ -291,7 +291,7 @@
         <ul class="team-grid">
           <li class="team-card">
             <!-- To use a photo instead: <img class="avatar" src="{{ url_for('static', filename='images/andrea.jpg') }}" alt=""> -->
-            <span class="avatar">AR</span>
+            <img class="avatar" src="{{ url_for('static', filename='images/andrea.jpg') }}" alt="">
             <div class="stack-6">
               <h3>Andrea Rico Montaña</h3>
               <span class="pill small">CEO</span>
@@ -299,7 +299,7 @@
           </li>
           <li class="team-card">
             <!-- To use a photo instead: <img class="avatar" src="{{ url_for('static', filename='images/charlie.jpg') }}" alt=""> -->
-            <span class="avatar warm">CR</span>
+            <img class="avatar" src="{{ url_for('static', filename='images/charlie.jpg') }}" alt="">
             <div class="stack-6">
               <h3>Charlie Rayner</h3>
               <span class="pill small">CTO</span>
