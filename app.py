@@ -18,7 +18,7 @@ app = Flask(__name__)
 LINKS = {
     # "Learn more about ALMA" cards
     "write_up": "#",         # Devpost / hackathon submission page
-    "source_code": "#",      # GitHub repository
+    "source_code": "https://github.com/lab-of-the-future/alma-app",  # GitHub repository
     "pitch_deck": "#",       # Slides
     "demo_video": "#",       # Full demo on YouTube / Vimeo
 
@@ -29,7 +29,7 @@ LINKS = {
     "pipetting": "#",
 }
 
-HACKATHON_NAME = "[Hackathon name]"
+HACKATHON_NAME = "Lab-of-the-Future Hackathon"
 
 
 @app.route("/")

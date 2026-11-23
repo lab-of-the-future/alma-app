@@ -5,75 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ALMA – Automated Lab Manager Assistant</title>
   <meta name="description" content="ALMA uses Aria Gen 2 glasses to turn a researcher's work into a lab report and flag protocol mistakes as they happen.">
+  <meta name="theme-color" content="#36958F">
   <link rel="icon" href="{{ url_for('static', filename='images/favicon.svg') }}" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <!-- Logo intro: plays once per browser session. Add ?intro to the URL to see it again. -->
+  <script>
+    (function () {
+      var html = document.documentElement, skip = false;
+      try {
+        skip = sessionStorage.getItem('alma-intro-seen') === '1' && location.search.indexOf('intro') === -1;
+        skip = skip || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      } catch (e) {}
+      html.classList.add(skip ? 'no-intro' : 'intro-active');
+    })();
+  </script>
 </head>
 <body id="top">
+  {% include 'partials/logo-symbols.svg' %}
+
+  <!-- ================= LOGO INTRO (full screen) ================= -->
+  <div class="intro" id="intro">
+    <!-- data-speed: playback speed (1 = normal, 1.5 = 50% faster) -->
+    <video class="intro-video" data-speed="1.5" data-src="{{ url_for('static', filename='videos/logo.mp4') }}" muted playsinline preload="none" aria-hidden="true"></video>
+    <button type="button" class="intro-skip">Skip intro</button>
+  </div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ================= NAV ================= -->
-  <header>
+  <!-- ================= NAV + HERO ================= -->
+  <header class="hero-band">
     <nav class="container nav" aria-label="Primary">
-      <a href="#top" class="brand">
-        <span class="brand-mark">
-          <svg width="26" height="16" viewBox="0 0 34 20" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="12" height="13" rx="5" stroke="#fff" stroke-width="2.6"/><rect x="20.5" y="3" width="12" height="13" rx="5" stroke="#fff" stroke-width="2.6"/><path d="M13.5 8.5 Q17 5.5 20.5 8.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>
-        </span>
-        <span class="brand-name">ALMA</span>
+      <a href="#top" class="brand" aria-label="ALMA, back to top">
+        <svg class="brand-mark" viewBox="0 0 500 151" aria-hidden="true"><use href="#alma-mark"/></svg>
+        <svg class="brand-word" viewBox="0 0 500 94" aria-hidden="true"><use href="#alma-word"/></svg>
       </a>
       <div class="nav-links">
+        <a href="#demos">Demos</a>
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
         <a href="#team">Team</a>
         <a href="#learn">Learn more</a>
-        <a href="#features" class="btn btn-primary btn-sm">Watch demo</a>
+        <a href="#demos" class="btn btn-light btn-sm">Watch demos</a>
       </div>
     </nav>
 
-    <!-- ================= HERO ================= -->
     <div class="container hero">
-      <div class="hero-copy">
-        <span class="pill">Built on Project Aria Gen 2 · {{ hackathon }}</span>
-        <h1>The lab notebook that writes itself.</h1>
-        <p class="lead">ALMA, the Automated Lab Manager Assistant, sees the bench through Aria Gen 2 glasses. It turns a researcher's work into a lab report and flags protocol mistakes as they happen.</p>
-        <div class="btn-row">
-          <a href="#features" class="btn btn-primary">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
-            See it in action
-          </a>
-          <a href="#learn" class="btn btn-secondary">Read the write-up</a>
-        </div>
-      </div>
-
-      <div class="hero-visual">
-        <!-- HERO VIDEO: put your file at static/videos/hero.mp4 and it replaces the illustration automatically -->
-        <div class="video-slot hero-slot">
-          <video src="{{ url_for('static', filename='videos/hero.mp4') }}" controls playsinline preload="metadata" aria-label="ALMA demo video"></video>
-          <div class="video-placeholder" role="img" aria-label="Illustration of the glasses' view with detected lab equipment outlined: a pipette, a 96-well plate and a balance display">
-            <span class="chip chip-live"><span class="dot"></span>Live from the glasses</span>
-            <span class="chip chip-step">Step 3 of 7</span>
-            <div class="detect" style="left:12%; top:26%; width:17%; height:46%;"><span>Pipette</span></div>
-            <div class="detect" style="left:36%; top:52%; width:36%; height:30%;"><span>96-well plate</span></div>
-            <div class="detect" style="left:68%; top:26%; width:22%; height:17%;"><span>Balance display</span></div>
-          </div>
-        </div>
-
-        <div class="report-card">
-          <div class="report-head">
-            <strong>Live lab report</strong>
-            <span>[Protocol name]</span>
-          </div>
-          <ol class="report-list">
-            <li><time>14:31</time><span>Picked up P200 pipette</span></li>
-            <li><time>14:32</time><span>Dispensed into wells A1–C6</span></li>
-            <li class="report-alert">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 10.9v.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              <span><strong>Heads up:</strong> step 4 (vortex sample) was skipped</span>
-            </li>
-          </ol>
-        </div>
+      <h1 class="hero-logo">
+        <svg class="hero-mark" viewBox="0 0 500 151" aria-hidden="true"><use href="#alma-mark"/></svg>
+        <svg class="hero-word" viewBox="0 0 500 94" aria-hidden="true"><use href="#alma-word"/></svg>
+        <span class="visually-hidden">ALMA</span>
+      </h1>
+      <span class="pill pill-on-brand">Built on Project Aria Gen 2 · {{ hackathon }}</span>
+      <p class="hero-title">Your lab assistant, built into your glasses.</p>
+      <p class="lead">ALMA sees the bench through Aria Gen 2 glasses. It knows lab equipment and procedures, guides researchers through each protocol, flags mistakes as they happen and writes the report for them.</p>
+      <div class="btn-row">
+        <a href="#demos" class="btn btn-light">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 2.5v11l9-5.5-9-5.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          See it in action
+        </a>
+        <a href="#learn" class="btn btn-outline">Read the write-up</a>
       </div>
     </div>
 
@@ -81,26 +74,94 @@
     <div class="container">
       <ul class="benefits">
         <li>
-          <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12.5" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M8 6l1.5-2h5L16 6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
-          <div><strong>Just one camera</strong><p>No extra sensors or bench setup.</p></div>
+          <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 6.5 5.2 8.2 8.5 4.9M3.5 13.5l1.7 1.7 3.3-3.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="19.5" r="1.7" stroke="currentColor" stroke-width="1.8"/><path d="M11.5 6.5h9M11.5 13.5h9M11.5 19.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <div><strong>Guided protocols</strong><p>Walks researchers through every step.</p></div>
         </li>
         <li>
           <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3h9l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 11h7M9 15h7M9 7h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
           <div><strong>Reports, done for you</strong><p>Written while you work.</p></div>
         </li>
         <li>
-          <span class="icon-box peach"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+          <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.5v5.5M12 16v.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
           <div><strong>Fewer costly mistakes</strong><p>Flags deviations in the moment.</p></div>
         </li>
         <li>
           <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4h10M9 4v6l-4.5 8A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.8-3L15 10V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 15h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <div><strong>Made for the lab</strong><p>Knows a pipette from a pen.</p></div>
+          <div><strong>Made for the lab</strong><p>Trained on lab-specific equipment and materials.</p></div>
         </li>
       </ul>
     </div>
   </header>
 
   <main id="main">
+    <!-- ================= DEMOS ================= -->
+    <section id="demos" class="section demos">
+      <div class="container stack-96">
+        <div class="section-head stack-14">
+          <span class="eyebrow">See it in action</span>
+          <h2>Demos from the bench.</h2>
+          <p class="section-intro">Real footage from the glasses and the lab, overlaid with what ALMA sees: detected objects, segmented equipment and a live plate map for pipetting.</p>
+        </div>
+
+        <!-- Demo 1: pipette tracking -->
+        <article class="demo">
+          <div class="demo-media">
+            <div class="video-frame" style="aspect-ratio: 16 / 9;">
+              <!-- data-speed: playback speed (1 = normal, 1.5 = 50% faster) -->
+              <video class="demo-video" data-speed="1.5" src="{{ url_for('static', filename='videos/pipetting.mp4') }}" poster="{{ url_for('static', filename='images/posters/pipetting.jpg') }}" muted loop playsinline controls preload="none" aria-label="Demo: pipette tracking on a 96-well plate"></video>
+            </div>
+          </div>
+          <div class="demo-text">
+            <span class="pill pill-on-dark">Demo 1</span>
+            <h3>Pipette tracking on 96-well plates</h3>
+            <p>ALMA follows the pipette through the researcher's eyes and records each dispense: which wells have received liquid, how many dispenses so far and the last volume. The plate map fills itself in as the work happens.</p>
+            <ul class="checklist">
+              <li>Tracks the pipette and plate from the glasses' camera</li>
+              <li>Logs every dispense, well by well</li>
+              <li>Live plate map, ready for the report</li>
+            </ul>
+          </div>
+        </article>
+        <hr style="width:100%; border:0; border-top:1px solid #E2DDCC; margin:0;">
+        <!-- Demo 2: lab-specific object detection & tracking -->
+        <article class="demo reverse">
+          <div class="demo-text">
+            <span class="pill pill-on-dark">Demo 2</span>
+            <h3>Lab-specific object detection &amp; tracking</h3>
+            <p>Everyday vision models see “a bottle”. Our own detection and tracking system is trained on lab equipment, so it recognises the tools of the trade and follows them across the bench and the room.</p>
+            <ul class="tags" aria-label="Examples of objects ALMA detects">
+              <li>P200 pipette</li>
+              <li>96-well plate</li>
+              <li>Tip boxes</li>
+              <li>Sample tubes</li>
+              <li>Tube racks</li>
+              <li>Eppendorf tubes</li>
+              <li>Centrifuge</li>
+              <li>Lab fridge</li>
+              <li>Clinical waste</li>
+            </ul>
+          </div>
+          <div class="demo-media">
+            <div class="video-frame" style="aspect-ratio: 4 / 3;">
+              <video class="demo-video" src="{{ url_for('static', filename='videos/object_tracking.mp4') }}" poster="{{ url_for('static', filename='images/posters/object_tracking.jpg') }}" muted loop playsinline controls preload="none" aria-label="Demo: lab objects detected and tracked from the glasses' view"></video>
+            </div>
+            <p class="caption">From the glasses: tip boxes, the plate, sample tube and pipette, each tracked as the researcher works.</p>
+          </div>
+        </article>
+
+        <!-- Demo 2b: segmentation, wide video -->
+        <figure class="demo-wide">
+          <!-- This video is very wide (32:9), so on phones it scrolls sideways instead of shrinking -->
+          <div class="wide-scroll">
+            <div class="video-frame" style="aspect-ratio: 32 / 9;">
+              <video class="demo-video" src="{{ url_for('static', filename='videos/segmentation.mp4') }}" poster="{{ url_for('static', filename='images/posters/segmentation.jpg') }}" muted loop playsinline controls preload="none" aria-label="Demo: lab objects segmented and tracked across a room"></video>
+            </div>
+          </div>
+          <figcaption class="caption">Across the room: every tracked object is segmented and kept as its own labelled crop, from lab coats and notebooks to fridges and pipettes.<span class="swipe-hint"> Swipe sideways to see the whole video.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
     <!-- ================= HOW IT WORKS ================= -->
     <section id="how" class="section">
       <div class="container stack-56">
@@ -143,12 +204,21 @@
         <!-- Feature 1 -->
         <article class="feature">
           <div class="feature-media">
-            <!-- VIDEO: static/videos/lab-reports.mp4 -->
-            <div class="video-slot">
-              <video src="{{ url_for('static', filename='videos/lab-reports.mp4') }}" controls playsinline preload="metadata" aria-label="Demo: automated lab reports"></video>
-              <div class="video-placeholder">
-                <span class="play-btn" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 16 16"><path d="M5 2.8v10.4l8.4-5.2L5 2.8Z" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
-                <span class="video-label">Demo video · Automated lab reports</span>
+            <div class="mock" role="img" aria-label="Example of a live lab report: steps logged with times and one skipped step flagged">
+              <div class="report-card">
+                <div class="report-head">
+                  <strong>Live lab report</strong>
+                  <span>[Protocol name]</span>
+                </div>
+                <ol class="report-list">
+                  <li><time>14:29</time><span>Put on gloves and lab coat</span></li>
+                  <li><time>14:31</time><span>Picked up P200 pipette</span></li>
+                  <li><time>14:32</time><span>Dispensed into wells A1–C6</span></li>
+                  <li class="report-alert">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 10.9v.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    <span><strong>Heads up:</strong> step 4 (vortex sample) was skipped</span>
+                  </li>
+                </ol>
               </div>
             </div>
           </div>
@@ -161,7 +231,6 @@
               <li>Equipment used at each step</li>
               <li>Draft report ready when the work is done</li>
             </ul>
-            <a href="{{ links.reports }}" class="text-link">Learn more about reports</a>
           </div>
         </article>
 
@@ -176,19 +245,18 @@
               <li>Flags deviations as they happen</li>
               <li>Every deviation recorded in the report</li>
             </ul>
-            <a href="{{ links.mistakes }}" class="text-link">Learn more about mistake detection</a>
           </div>
           <div class="feature-media">
-            <!-- VIDEO: static/videos/mistake-detection.mp4 -->
-            <div class="video-slot peach">
-              <video src="{{ url_for('static', filename='videos/mistake-detection.mp4') }}" controls playsinline preload="metadata" aria-label="Demo: protocol mistake detection"></video>
-              <div class="video-placeholder">
-                <span class="chip chip-alert">
-                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.6"/><path d="M8 4.8v3.8M8 10.9v.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                  Step 4 skipped
-                </span>
-                <span class="play-btn" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 16 16"><path d="M5 2.8v10.4l8.4-5.2L5 2.8Z" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
-                <span class="video-label">Demo video · Mistake detection</span>
+            <div class="mock warm" role="img" aria-label="Example protocol checklist: steps 1 to 3 done, step 4 flagged as skipped, step 5 in progress">
+              <div class="protocol-card">
+                <div class="report-head"><strong>Protocol</strong><span>Step 5 of 7</span></div>
+                <ol class="protocol-list">
+                  <li class="done">Label tubes</li>
+                  <li class="done">Add buffer to each tube</li>
+                  <li class="done">Add sample</li>
+                  <li class="skipped">Vortex sample <em>Skipped</em></li>
+                  <li class="current">Dispense into plate</li>
+                </ol>
               </div>
             </div>
           </div>
@@ -196,68 +264,8 @@
       </div>
     </section>
 
-    <!-- ================= SPECIAL FEATURES ================= -->
-    <section id="special" class="section band">
-      <div class="container stack-56">
-        <div class="section-head stack-14">
-          <span class="eyebrow">Special features</span>
-          <h2>Eyes trained for the lab bench.</h2>
-          <p class="section-intro">Everyday vision models see “a bottle”. ALMA recognises the tools of the trade and follows them through the experiment.</p>
-        </div>
-
-        <div class="special-grid">
-          <article class="special-card">
-            <!-- VIDEO: static/videos/object-tracking.mp4 -->
-            <div class="video-slot">
-              <video src="{{ url_for('static', filename='videos/object-tracking.mp4') }}" controls playsinline preload="metadata" aria-label="Demo: lab object and display tracking"></video>
-              <div class="video-placeholder">
-                <div class="detect" style="left:8%; top:24%; width:26%; height:42%;"><span>Tube rack</span></div>
-                <div class="detect" style="left:64%; top:22%; width:28%; height:24%;"><span>Display</span></div>
-                <span class="play-btn" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 16 16"><path d="M5 2.8v10.4l8.4-5.2L5 2.8Z" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
-                <span class="video-label">Demo video · Object tracking</span>
-              </div>
-            </div>
-            <div class="stack-12">
-              <h3>Lab object &amp; display detection</h3>
-              <p>Lab-specific detection recognises and tracks equipment and instrument displays across the bench, so ALMA always knows what's being used.</p>
-            </div>
-            <ul class="tags" aria-label="Examples of detected objects">
-              <li>Pipettes</li>
-              <li>Tube racks</li>
-              <li>Well plates</li>
-              <li>Instrument displays</li>
-              <li>[More objects]</li>
-            </ul>
-            <a href="{{ links.object_tracking }}" class="text-link">Learn more</a>
-          </article>
-
-          <article class="special-card">
-            <!-- VIDEO: static/videos/pipetting-tracking.mp4 -->
-            <div class="video-slot sand">
-              <video src="{{ url_for('static', filename='videos/pipetting-tracking.mp4') }}" controls playsinline preload="metadata" aria-label="Demo: pipetting tracking"></video>
-              <div class="video-placeholder plate-wrap">
-                <!-- The plate map is drawn by script.js -->
-                <div class="plate" data-plate role="img" aria-label="96-well plate map: rows A and B and wells C1 to C6 filled, well C7 in progress, the rest empty"></div>
-                <span class="video-label">Demo video · Pipetting tracking</span>
-              </div>
-            </div>
-            <div class="stack-12">
-              <h3>Pipetting tracking on 96-well plates</h3>
-              <p>ALMA follows the pipette across a 96-well plate and records which wells have received liquid, so the plate map fills itself in.</p>
-            </div>
-            <ul class="legend" aria-label="Plate map legend">
-              <li><span class="well filled"></span>Filled</li>
-              <li><span class="well current"></span>Pipetting now</li>
-              <li><span class="well"></span>Empty</li>
-            </ul>
-            <a href="{{ links.pipetting }}" class="text-link">Learn more</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <!-- ================= UNDER THE HOOD ================= -->
-    <section class="section">
+    <section class="section band">
       <div class="container stack-48">
         <div class="section-head stack-14">
           <span class="eyebrow">Under the hood</span>
@@ -270,12 +278,11 @@
           <li><span class="label">Step 3</span><strong>Check the protocol</strong><p>Each step compared with the loaded protocol.</p></li>
           <li class="result"><span class="label">Result</span><strong>Report &amp; alerts</strong><p>A drafted report, with deviations flagged.</p></li>
         </ol>
-        <p class="muted">Built with: [models · frameworks · hardware]</p>
       </div>
     </section>
 
     <!-- ================= TEAM ================= -->
-    <section id="team" class="section section-tight">
+    <section id="team" class="section">
       <div class="container stack-40">
         <div class="section-head stack-14">
           <span class="eyebrow">The team</span>
@@ -292,7 +299,7 @@
           </li>
           <li class="team-card">
             <!-- To use a photo instead: <img class="avatar" src="{{ url_for('static', filename='images/charlie.jpg') }}" alt=""> -->
-            <span class="avatar peach">CR</span>
+            <span class="avatar warm">CR</span>
             <div class="stack-6">
               <h3>Charlie Rayner</h3>
               <span class="pill small">CTO</span>
@@ -306,6 +313,7 @@
     <section id="learn" class="section section-tight">
       <div class="container">
         <div class="cta-panel">
+          <svg class="cta-mark" viewBox="0 0 500 151" aria-hidden="true"><use href="#alma-mark"/></svg>
           <div class="cta-head">
             <h2>Learn more about ALMA</h2>
             <p>The full story: how we built it, the code behind it and the complete demo.</p>
@@ -337,10 +345,8 @@
   <footer class="footer">
     <div class="container footer-inner">
       <span class="brand footer-brand">
-        <span class="brand-mark small">
-          <svg width="20" height="12" viewBox="0 0 34 20" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="12" height="13" rx="5" stroke="#fff" stroke-width="2.8"/><rect x="20.5" y="3" width="12" height="13" rx="5" stroke="#fff" stroke-width="2.8"/><path d="M13.5 8.5 Q17 5.5 20.5 8.5" stroke="#fff" stroke-width="2.8" stroke-linecap="round"/></svg>
-        </span>
-        <span class="brand-name">ALMA</span>
+        <svg class="brand-mark" viewBox="0 0 500 151" aria-hidden="true"><use href="#alma-mark"/></svg>
+        <svg class="brand-word" viewBox="0 0 500 94" aria-hidden="true"><use href="#alma-word"/></svg>
         <span>Automated Lab Manager Assistant</span>
       </span>
       <span>A {{ hackathon }} project. Built on Project Aria Gen 2; not affiliated with Meta.</span>

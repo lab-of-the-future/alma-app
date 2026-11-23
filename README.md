@@ -5,12 +5,14 @@ alma-app/
 ├── app.py              ← the app: routes, links, hackathon name
 ├── requirements.txt
 ├── templates/
-│   └── index.html      ← page content and text
+│   ├── index.html      ← page content and text
+│   └── partials/
+│       └── logo-symbols.svg  ← the ALMA logo as vector shapes (used in nav, hero, footer)
 └── static/
-    ├── styles.css      ← styling (colours at the top)
-    ├── script.js       ← video swapping and the 96-well plate
-    ├── images/         ← favicon, team photos
-    └── videos/         ← demo videos (see PUT-VIDEOS-HERE.txt)
+    ├── styles.css      ← styling (logo colours at the top)
+    ├── script.js       ← full-screen logo intro + demo video autoplay
+    ├── images/         ← favicon, logo SVGs, video poster frames, team photos
+    └── videos/         ← logo.mp4 (intro) and the demo videos
 ```
 
 ## Run it on your computer
@@ -32,8 +34,10 @@ Open http://127.0.0.1:5000. The server restarts by itself when you save
 - **Links:** edit the `LINKS` dictionary at the top of `app.py`.
 - **Hackathon name:** `HACKATHON_NAME` in `app.py`.
 - **Text:** `templates/index.html`. Anything inside `{{ }}` is filled in by `app.py`.
-- **Colours:** variables at the top of `static/styles.css`.
-- **Videos:** drop MP4s into `static/videos/` with the names listed there.
+- **Colours:** variables at the top of `static/styles.css` (teal `#36958F` and cream `#F6F4EB` come from the logo).
+- **Logo intro:** plays once per browser session. To see it again, open the site with `?intro` at the end of the address.
+- **Videos:** must be H.264 MP4s, or Chrome and Safari won't play them. To convert one:
+  `ffmpeg -i input.mp4 -c:v libx264 -crf 23 -pix_fmt yuv420p -movflags +faststart -an output.mp4`
 - **New page or feature:** see the commented examples at the bottom of `app.py`.
 
 ## Deploy on PythonAnywhere
