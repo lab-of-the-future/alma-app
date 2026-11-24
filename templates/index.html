@@ -46,6 +46,7 @@
         <a href="#demos">Demos</a>
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
+        <a href="#reports">Reports</a>
         <a href="#team">Team</a>
         {# <a href="#learn">Learn more</a> #}
         <a href="#demos" class="btn btn-light btn-sm">Watch demos</a>
@@ -67,6 +68,7 @@
           See it in action
         </a>
         {# <a href="#learn" class="btn btn-outline">Read the write-up</a> #}
+        <a href="{{ links.survey }}" class="btn btn-outline" target="_blank" rel="noopener">Take our lab survey</a>
       </div>
     </div>
 
@@ -264,20 +266,34 @@
       </div>
     </section>
 
-    <!-- ================= UNDER THE HOOD ================= -->
-    <section class="section band">
+    <!-- ================= REPORTS ================= -->
+    <section id="reports" class="section band">
       <div class="container stack-48">
         <div class="section-head stack-14">
-          <span class="eyebrow">Under the hood</span>
-          <h2>From what you see to a finished report.</h2>
+          <span class="eyebrow">Reports</span>
+          <h2>One record of the experiment, the report you need.</h2>
+          <p class="section-intro">ALMA keeps a complete, time-stamped record of the work at the bench. From it, we produce the report your lab needs.</p>
         </div>
-        <ol class="pipeline">
-          <li><span class="label">Input</span><strong>The researcher's view</strong><p>Video from the Aria Gen 2 glasses' camera.</p></li>
-          <li><span class="label">Step 1</span><strong>Spot &amp; track</strong><p>Lab objects, displays and the pipette across the plate.</p></li>
-          <li><span class="label">Step 2</span><strong>Understand the steps</strong><p>What the researcher is doing, moment by moment.</p></li>
-          <li><span class="label">Step 3</span><strong>Check the protocol</strong><p>Each step compared with the loaded protocol.</p></li>
-          <li class="result"><span class="label">Result</span><strong>Report &amp; alerts</strong><p>A drafted report, with deviations flagged.</p></li>
-        </ol>
+        <ul class="report-grid">
+          <li class="report-type">
+            <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5C6.5 4.2 9.3 4.2 12 6c2.7-1.8 5.5-1.8 8-.5v13c-2.5-1.3-5.3-1.3-8 .5-2.7-1.8-5.5-1.8-8-.5v-13Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 6v13" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <h3>Publication report</h3>
+            <p>A ready-made protocol and metadata record to go with your paper, so every method can be repeated.</p>
+            <p class="audience"><span>For</span> academic labs, researchers and PIs</p>
+          </li>
+          <li class="report-type">
+            <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3 5 6v5.5c0 4.3 3 7.9 7 9.5 4-1.6 7-5.2 7-9.5V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.8 12.2 2.2 2.2 4.3-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Compliance report</h3>
+            <p>Audit trails that meet industry standards, with every step time-stamped and traceable.</p>
+            <p class="audience"><span>For</span> pharma and regulated biotech</p>
+          </li>
+          <li class="report-type">
+            <span class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14.5v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3>IP record</h3>
+            <p>Confidential records of who did what and when, to protect and track your intellectual property.</p>
+            <p class="audience"><span>For</span> biotech and pharma R&amp;D</p>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -290,22 +306,36 @@
         </div>
         <ul class="team-grid">
           <li class="team-card">
-            <!-- To use a photo instead: <img class="avatar" src="{{ url_for('static', filename='images/andrea.jpg') }}" alt=""> -->
             <img class="avatar" src="{{ url_for('static', filename='images/andrea.jpg') }}" alt="">
             <div class="stack-6">
               <h3>Andrea Rico Montaña</h3>
               <span class="pill small">CEO</span>
+              <a class="linkedin-link" href="{{ links.linkedin_andrea }}" target="_blank" rel="noopener" aria-label="Andrea Rico Montaña on LinkedIn">LinkedIn <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
           </li>
           <li class="team-card">
-            <!-- To use a photo instead: <img class="avatar" src="{{ url_for('static', filename='images/charlie.jpg') }}" alt=""> -->
             <img class="avatar" src="{{ url_for('static', filename='images/charlie.jpg') }}" alt="">
             <div class="stack-6">
               <h3>Charlie Rayner</h3>
               <span class="pill small">CTO</span>
+              <a class="linkedin-link" href="{{ links.linkedin_charlie }}" target="_blank" rel="noopener" aria-label="Charlie Rayner on LinkedIn">LinkedIn <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- ================= SURVEY ================= -->
+    <section id="survey" class="section section-tight">
+      <div class="container">
+        <div class="cta-panel survey-panel">
+          <svg class="cta-mark" viewBox="0 0 500 151" aria-hidden="true"><use href="#alma-mark"/></svg>
+          <div class="cta-head">
+            <h2>Work in a wet lab? Help us shape ALMA.</h2>
+            <p>Tell us how you run and record experiments, what slows you down and what you'd want from an AI lab assistant. Your answers go straight into what we build next.</p>
+          </div>
+          <a href="{{ links.survey }}" class="btn btn-light survey-btn" target="_blank" rel="noopener">Take our lab survey <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
     </section>
 

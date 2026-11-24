@@ -27,6 +27,13 @@ LINKS = {
     "mistakes": "#",
     "object_tracking": "#",
     "pipetting": "#",
+
+    # Survey for wet-lab researchers (hero button + survey panel)
+    "survey": "https://form.jotform.com/262716592147059",
+
+    # Team LinkedIn profiles
+    "linkedin_andrea": "https://www.linkedin.com/in/andrea-rico-montana/",
+    "linkedin_charlie": "https://www.linkedin.com/in/charrayner/",
 }
 
 HACKATHON_NAME = "Lab-of-the-Future Hackathon"
